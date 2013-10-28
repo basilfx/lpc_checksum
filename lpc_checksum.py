@@ -9,7 +9,7 @@ __version__ = "1.0.0"
 
 """
 Calculate checksum image for LPC firmware images and write. Code is a Pyton port
-of the C version written by Roel Verdult named `slpcrc'.
+of the C version written by Roel Verdult named `lpcrc'.
 """
 
 BLOCK_COUNT = 7
