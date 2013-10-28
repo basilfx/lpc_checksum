@@ -1,5 +1,5 @@
 # lpc_checksum v1.0
-Python script to calculate LPC firmware checksums, based on the C version by Roel Verdult. Can be used as a stand alone application, or as a Python module to integrate directly in a build environment (e.g. SCons).
+Python script to calculate LPC firmware checksums, based on the C version by Roel Verdult. Can be used as a stand alone application, or as a Python module to integrate directly in a build environment (e.g. SCons). It does not require to be compiled.
 
 ## Requirements
 * Python 2.7
