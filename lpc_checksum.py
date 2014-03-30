@@ -16,6 +16,12 @@ BLOCK_COUNT = 7
 BLOCK_LENGTH = 4
 BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_LENGTH)
 
+def run():
+    """
+    Entry point for console script.
+    """
+    sys.exit(main())
+
 def main():
     """
     Command line wrapper for the checsum() method. Requires the first parameter
@@ -77,4 +83,4 @@ def checksum(filename, read_only=False):
 
 # Invoke main when started from command line
 if __name__ == "__main__":
-    sys.exit(main())
+    run()

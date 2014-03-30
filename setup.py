@@ -15,7 +15,7 @@ setup(
     keywords = "lpc mcu cortex nxp",
     entry_points={
         "console_scripts": [
-            "lpc_checksum = lpc_checksum:main",
+            "lpc_checksum = lpc_checksum:run",
         ]
     },
     classifiers = [
