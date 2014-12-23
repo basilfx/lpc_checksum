@@ -5,11 +5,11 @@ import os
 import struct
 import argparse
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 """
-Calculate checksum image for LPC firmware images and write. Code is a Pyton port
-of the C version written by Roel Verdult named `lpcrc'.
+Calculate checksum image for LPC firmware images and write. Code is a Python
+port of the C version written by Roel Verdult named `lpcrc'.
 """
 
 BLOCK_COUNT = 7
@@ -39,13 +39,12 @@ def main():
     # Calculate checksum
     try:
         result = checksum(options.filename, options.readonly)
-    except Exception, e:
+    except Exception as e:
         sys.stdout.write("Error: %s\n" % (e.strerror or e.message))
         return 1
 
     # Done
     sys.stdout.write("Succesfully updated CRC to 0x%08x\n" % result)
-    return 0
 
 def checksum(filename, read_only=False):
     """
