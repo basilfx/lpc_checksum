@@ -3,19 +3,24 @@ from setuptools import setup
 # Setup definitions
 setup(
     name="lpc_checksum",
-    version="1.0.1",
+    version="1.1.0",
     description="Python script to calculate LPC firmware checksums",
+    long_description=open("README.rst").read(),
     author="Bas Stottelaar",
     author_email="basstottelaar@gmail.com",
     py_modules=["lpc_checksum"],
+    platforms=["any"],
     license="MIT",
-    keywords="lpc mcu cortex nxp",
+    url="https://github.com/basilfx/lpc_checksum",
+    keywords="lpc mcu cortex nxp flashing",
+    test_suite="tests",
+    zip_safe=False,
     entry_points={
         "console_scripts": [
             "lpc_checksum = lpc_checksum:run",
         ]
     },
-    classifiers = [
+    classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
