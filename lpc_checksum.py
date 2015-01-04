@@ -5,7 +5,7 @@ import os
 import struct
 import argparse
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"
 
 """
 Calculate checksum image for LPC firmware images and write. Code is a Python
@@ -16,11 +16,13 @@ BLOCK_COUNT = 7
 BLOCK_LENGTH = 4
 BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_LENGTH)
 
+
 def run():
     """
     Entry point for console script.
     """
     sys.exit(main())
+
 
 def main():
     """
@@ -46,11 +48,12 @@ def main():
     # Done
     sys.stdout.write("Succesfully updated CRC to 0x%08x\n" % result)
 
+
 def checksum(filename, read_only=False):
     """
-    Calculate the checksum of a given binary image. The checksum is written back
-    to the file and is returned. When read_only is set to True, the file will
-    not be changed
+    Calculate the checksum of a given binary image. The checksum is written
+    back to the file and is returned. When read_only is set to True, the file
+    will not be changed
 
     filename  -- firmware file to checksum
     read_only -- whether to write checksum back to filename or not
