@@ -1,20 +1,24 @@
 #!/usr/bin/env python
 
 import sys
-import os
 import struct
 import argparse
+import intelhex
 
-__version__ = "1.1.0"
+__version__ = "2.0.0"
 
 """
 Calculate checksum image for LPC firmware images and write. Code is a Python
 port of the C version written by Roel Verdult named `lpcrc'.
+
+The checksum is the two's-complement of the sum of the first seven 4-byte
+blocks. This value is placed in the eight block.
 """
 
+BLOCK_START = 0
 BLOCK_COUNT = 7
-BLOCK_LENGTH = 4
-BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_LENGTH)
+BLOCK_SIZE = 4
+BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_SIZE)
 
 
 def run():
@@ -31,58 +35,68 @@ def main():
     Output is written to stdout and errors to stderr.
     """
 
-    # Parse arguments
+    # Parse arguments.
     parser = argparse.ArgumentParser()
-    parser.add_argument("filename", help="input firmware for checksumming")
-    parser.add_argument("-r", "--readonly", action="store_true",
-                        help="read only mode (do not write checksum to file)")
+    parser.add_argument(
+        "filename", type=str, help="input file for checksumming")
+    parser.add_argument(
+        "-f", "--format", action="store", type=str, default="bin",
+        choices=["bin", "hex"], help="input file format (defaults to bin)")
+    parser.add_argument(
+        "-r", "--readonly", action="store_true",
+        help="read only mode (do not write checksum to file)")
     options = parser.parse_args()
 
-    # Calculate checksum
+    # Calculate checksum.
     try:
-        result = checksum(options.filename, options.readonly)
+        result = checksum(
+            options.filename, options.format, options.readonly)
     except Exception as e:
-        sys.stdout.write("Error: %s\n" % (e.strerror or e.message))
+        sys.stdout.write("Error: %s\n" % e)
         return 1
 
-    # Done
-    sys.stdout.write("Succesfully updated CRC to 0x%08x\n" % result)
+    # Done.
+    sys.stdout.write("Succesfully updated checksum to 0x%08x\n" % result)
 
 
-def checksum(filename, read_only=False):
+def checksum(filename, format="bin", read_only=False):
     """
     Calculate the checksum of a given binary image. The checksum is written
     back to the file and is returned. When read_only is set to True, the file
-    will not be changed
+    will not be changed.
 
     filename  -- firmware file to checksum
-    read_only -- whether to write checksum back to filename or not
+    format    -- input file format (bin or hex, default bin)
+    read_only -- whether to write checksum back to the file (default False)
     """
 
-    with open(filename, "rb+") as handle:
-        block = handle.read(BLOCK_TOTAL)
+    # Open the firmware file.
+    handle = intelhex.IntelHex()
+    handle.loadfile(filename, format=format)
 
-        # Read out the data blocks used for crc calculation
-        if len(block) != BLOCK_TOTAL:
-            raise Exception("Could not read required bytes")
+    # Read the data blocks used for checksum calculation.
+    block = bytearray(map(ord, handle.gets(BLOCK_START, BLOCK_TOTAL)))
 
-        # Compute the CRC value
-        crc = 0
+    if len(block) != BLOCK_TOTAL:
+        raise Exception("Could not read the required number of bytes.")
 
-        for i in range(BLOCK_COUNT):
-            value, = struct.unpack_from("I4", block, i * BLOCK_LENGTH)
-            crc += value
+    # Compute the checksum value.
+    result = 0
 
-        crc = ((~crc) + 1) & 0xFFFFFFFF
+    for i in range(BLOCK_COUNT):
+        value, = struct.unpack_from("I", block, i * BLOCK_SIZE)
+        result = (result + value) % 0xFFFFFFFF
 
-        # Write CRC bakc to the file
-        if not read_only:
-            handle.seek(0, os.SEEK_CUR)
-            handle.write(struct.pack("I4", crc))
+    result = ((~result) + 1) & 0xFFFFFFFF
 
-        # Done
-        return crc
+    # Write checksum back to the file.
+    if not read_only:
+        handle.puts(BLOCK_START + BLOCK_TOTAL, struct.pack("I", result))
+        handle.tofile(filename, format=format)
 
-# Invoke main when started from command line
+    # Done
+    return result
+
+# E.g. `python lpc_checksum.py --format bin firmware.bin`.
 if __name__ == "__main__":
     run()
