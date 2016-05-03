@@ -3,12 +3,13 @@ from setuptools import setup
 # Setup definitions
 setup(
     name="lpc_checksum",
-    version="1.1.0",
+    version="2.0.0",
     description="Python script to calculate LPC firmware checksums",
     long_description=open("README.rst").read(),
     author="Bas Stottelaar",
     author_email="basstottelaar@gmail.com",
     py_modules=["lpc_checksum"],
+    install_requires=["intelhex"],
     platforms=["any"],
     license="MIT",
     url="https://github.com/basilfx/lpc_checksum",
@@ -28,7 +29,6 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4"
+        "Programming Language :: Python :: 3.5"
     ]
 )
