@@ -2,14 +2,14 @@ lpc\_checksum
 =============
 
 Python script to calculate LPC firmware checksums, based on the C
-version by Roel Verdult. It can be used as a stand alone application, or
-as a Python module to integrate it directly in a build environment (e.g.
-SCons). It does not require to be compiled.
+version by Roel Verdult. It can be used as a standalone application, or
+as a Python module that integrates directly in a build environment (e.g.
+SCons). It does not need to be compiled.
 
 Requirements
 ------------
 
-The only requirement is Python 2.7.
+The only requirement is Python 2.7 or Python 3.5.
 
 Installation
 ------------
@@ -23,13 +23,14 @@ Usage
 
 There are two ways of using ``lpc_checksum``.
 
-Stand alone
-~~~~~~~~~~~
+Standalone
+~~~~~~~~~~
 
 When installed via Pip or from source, the command ``lpc_checksum``
-should be available on your PATH.
+should be available on your PATH. By default, it assumes the input file
+is a binary file.
 
-``lpc_checksum <firmware.bin> [--readonly]``
+``lpc_checksum <firmware.bin|hex> [--format=bin] [--readonly]``
 
 Program exits with a non-zero error code when it failed.
 
@@ -39,6 +40,7 @@ As a module
 ::
 
     import lpc_checksum
+
     checksum = lpc_checksum.checksum(input_file, [readonly=True])
 
 On error, an exception will be raised.

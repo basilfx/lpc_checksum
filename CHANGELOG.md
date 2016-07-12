@@ -8,7 +8,7 @@ Highlights:
 * Improved: Python 3 support.
 * Improved: code quality.
 
-The full list of commits can be found [here](https://github.com/basilfx/lpc_checksum/compare/v1.1.0...v1.2.0).
+The full list of commits can be found [here](https://github.com/basilfx/lpc_checksum/compare/v1.1.0...v2.0.0).
 
 ## v1.1.0
 Released 04 January 2015

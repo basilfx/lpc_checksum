@@ -20,6 +20,7 @@ Program exits with a non-zero error code when it failed.
 ### As a module
 ```
 import lpc_checksum
+
 checksum = lpc_checksum.checksum(input_file, [readonly=True])
 ```
 
