@@ -3,9 +3,10 @@ from setuptools import setup
 # Setup definitions.
 setup(
     name="lpc_checksum",
-    version="2.1.0",
+    version="2.1.1",
     description="Python script to calculate LPC firmware checksums",
     long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     author="Bas Stottelaar",
     author_email="basstottelaar@gmail.com",
     py_modules=["lpc_checksum"],
