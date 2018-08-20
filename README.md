@@ -1,6 +1,8 @@
 # lpc_checksum
 Python script to calculate LPC firmware checksums, based on the C version by Roel Verdult. It can be used as a standalone application, or as a Python module that integrates directly in a build environment (e.g. SCons). It does not need to be compiled.
 
+[![Build Status](https://travis-ci.org/basilfx/lpc_checksum.svg?branch=master)](https://travis-ci.org/basilfx/lpc_checksum)
+
 ## Requirements
 The only requirement is Python 2.7 or Python 3.5.
 
