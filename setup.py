@@ -9,6 +9,7 @@ setup(
     author="Bas Stottelaar",
     author_email="basstottelaar@gmail.com",
     py_modules=["lpc_checksum"],
+    setup_requires=["nose"],
     install_requires=["intelhex"],
     platforms=["any"],
     license="MIT",
