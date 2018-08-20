@@ -5,7 +5,7 @@ setup(
     name="lpc_checksum",
     version="2.0.0",
     description="Python script to calculate LPC firmware checksums",
-    long_description=open("README.rst").read(),
+    long_description=open("README.md").read(),
     author="Bas Stottelaar",
     author_email="basstottelaar@gmail.com",
     py_modules=["lpc_checksum"],
