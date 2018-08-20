@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.1.0
+Released 20 August 2018
+
+Highlights:
+* Fixed: support for Python 3.7 (fixes #1).
+* Added: basic testing.
+
+The full list of commits can be found [here](https://github.com/basilfx/lpc_checksum/compare/v2.0.0...v2.1.0).
+
 ## v2.0.0
 Released 03 May 2016
 

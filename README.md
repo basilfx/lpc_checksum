@@ -4,7 +4,7 @@ Python script to calculate LPC firmware checksums, based on the C version by Roe
 [![Build Status](https://travis-ci.org/basilfx/lpc_checksum.svg?branch=master)](https://travis-ci.org/basilfx/lpc_checksum)
 
 ## Requirements
-The only requirement is Python 2.7 or Python 3.5.
+The only requirement is Python 2.7 or Python 3.5+.
 
 ## Installation
 This module can be installed from Pypi via `pip install lpc_checksum`. Alternatively, you can install the latest version by cloning this repository and run `python setup.py install`.

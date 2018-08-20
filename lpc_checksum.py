@@ -5,7 +5,7 @@ import struct
 import argparse
 import intelhex
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 """
 Calculate checksum image for LPC firmware images and write. Code is a Python

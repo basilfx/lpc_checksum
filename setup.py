@@ -1,9 +1,9 @@
 from setuptools import setup
 
-# Setup definitions
+# Setup definitions.
 setup(
     name="lpc_checksum",
-    version="2.0.0",
+    version="2.1.0",
     description="Python script to calculate LPC firmware checksums",
     long_description=open("README.md").read(),
     author="Bas Stottelaar",
@@ -30,6 +30,8 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5"
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7"
     ]
 )
