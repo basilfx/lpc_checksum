@@ -75,7 +75,7 @@ def checksum(filename, format="bin", read_only=False):
     handle.loadfile(filename, format=format)
 
     # Read the data blocks used for checksum calculation.
-    block = bytearray(map(ord, handle.gets(BLOCK_START, BLOCK_TOTAL)))
+    block = bytearray(handle.gets(BLOCK_START, BLOCK_TOTAL))
 
     if len(block) != BLOCK_TOTAL:
         raise Exception("Could not read the required number of bytes.")
