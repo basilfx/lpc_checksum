@@ -10,7 +10,7 @@ class LpcChecksumTest(unittest.TestCase):
 
     def test_checksum__binary(self):
         """
-        Test checksum from a binary file.
+        Test the `checksum` method using a binary file.
         """
 
         path = os.path.join(
@@ -21,7 +21,7 @@ class LpcChecksumTest(unittest.TestCase):
 
     def test_checksum__hex(self):
         """
-        Test checksum from a HEX file.
+        Test the `checksum` method using a HEX file.
         """
 
         path = os.path.join(
@@ -29,3 +29,17 @@ class LpcChecksumTest(unittest.TestCase):
         checksum = lpc_checksum.checksum(path, format="hex", read_only=True)
 
         self.assertEqual(checksum, 0xefffe722)
+
+    def test_checksum__overflow(self):
+        """
+        Test the `checksum` method given a binary value that generates an
+        overflow. 
+        
+        See https://github.com/basilfx/lpc_checksum/issues/2. 
+        """
+
+        path = os.path.join(
+            os.path.dirname(__file__), "data", "overflow.bin")
+        checksum = lpc_checksum.checksum(path, format="bin", read_only=True)
+
+        self.assertEqual(checksum, 0x02b6aa66)

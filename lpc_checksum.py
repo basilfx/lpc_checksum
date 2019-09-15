@@ -85,7 +85,7 @@ def checksum(filename, format="bin", read_only=False):
 
     for i in range(BLOCK_COUNT):
         value, = struct.unpack_from("I", block, i * BLOCK_SIZE)
-        result = (result + value) % 0xFFFFFFFF
+        result = (result + value) & 0xFFFFFFFF
 
     result = ((~result) + 1) & 0xFFFFFFFF
 
