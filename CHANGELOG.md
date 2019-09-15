@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.1.2
+Released 15 September 2019
+
+Highlights:
+* Fixed: checksums that overflowed above 32-bit were computed incorrectly (issue #2).
+
+The full list of commits can be found [here](https://github.com/basilfx/lpc_checksum/compare/v2.1.1...v2.1.2).
+
 ## v2.1.1
 Released 21 August 2018
 
