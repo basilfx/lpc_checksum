@@ -1,6 +1,9 @@
-*.pyc
-*.pyo
-*.egg-info
 MANIFEST
+*.pyo
+*.pyc
+env
 dist/
 build/
+*.egg-info
+.eggs
+__pycache__
