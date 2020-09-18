@@ -10,7 +10,9 @@ setup(
     author="Bas Stottelaar",
     author_email="basstottelaar@gmail.com",
     py_modules=["lpc_checksum"],
-    setup_requires=["nose"],
+    extras_require={
+        "development": ["flake8", "nose"]
+    },
     install_requires=["intelhex"],
     platforms=["any"],
     license="MIT",
