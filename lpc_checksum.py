@@ -15,7 +15,6 @@ The checksum is the two's-complement of the sum of the first seven 4-byte
 blocks. This value is placed in the eight block.
 """
 
-BLOCK_START = 0
 BLOCK_COUNT = 7
 BLOCK_SIZE = 4
 BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_SIZE)
@@ -74,8 +73,10 @@ def checksum(filename, format="bin", read_only=False):
     handle = intelhex.IntelHex()
     handle.loadfile(filename, format=format)
 
+    block_start = handle.minaddr()
+
     # Read the data blocks used for checksum calculation.
-    block = bytearray(handle.gets(BLOCK_START, BLOCK_TOTAL))
+    block = bytearray(handle.gets(block_start, BLOCK_TOTAL))
 
     if len(block) != BLOCK_TOTAL:
         raise Exception("Could not read the required number of bytes.")
@@ -91,7 +92,7 @@ def checksum(filename, format="bin", read_only=False):
 
     # Write checksum back to the file.
     if not read_only:
-        handle.puts(BLOCK_START + BLOCK_TOTAL, struct.pack("I", result))
+        handle.puts(block_start + BLOCK_TOTAL, struct.pack("I", result))
         handle.tofile(filename, format=format)
 
     # Done
