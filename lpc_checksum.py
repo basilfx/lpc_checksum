@@ -98,6 +98,7 @@ def checksum(filename, format="bin", read_only=False):
     # Done
     return result
 
+
 # E.g. `python lpc_checksum.py --format bin firmware.bin`.
 if __name__ == "__main__":
     run()

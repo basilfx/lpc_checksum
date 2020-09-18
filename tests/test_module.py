@@ -32,7 +32,8 @@ class LpcChecksumTest(unittest.TestCase):
 
     def test_checksum__hex_high_start(self):
         """
-        Test the `checksum` method using a HEX file where the start address is not zero.
+        Test the `checksum` method using a HEX file where the start address is
+        not zero.
         """
 
         path = os.path.join(
