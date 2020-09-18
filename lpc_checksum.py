@@ -12,7 +12,7 @@ Calculate checksum image for LPC firmware images and write. Code is a Python
 port of the C version written by Roel Verdult named `lpcrc'.
 
 The checksum is the two's-complement of the sum of the first seven 4-byte
-blocks. This value is placed in the eight block.
+blocks (w.r.t the start address). This value is placed in the eight block.
 """
 
 BLOCK_COUNT = 7
