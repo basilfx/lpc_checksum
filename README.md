@@ -4,7 +4,9 @@ Roel Verdult. It can be used as a standalone application, or as a Python module
 that integrates directly in a build environment (e.g. SCons). It does not need
 to be compiled.
 
-[![Build Status](https://github.com/basilfx/lpc_checksum/workflows/lpc_checksum/badge.svg)](https://github.com/basilfx/lpc_checksum/actions)
+[![Linting](https://github.com/basilfx/lpc_checksum/actions/workflows/lint.yml/badge.svg)](https://github.com/basilfx/lpc_checksum/actions/workflows/lint.yml)
+[![Testing](https://github.com/basilfx/lpc_checksum/actions/workflows/test.yml/badge.svg)](https://github.com/basilfx/lpc_checksum/actions/workflows/test.yml)
+[![PyPI version](https://badge.fury.io/py/lpc_checksum.svg)](https://badge.fury.io/py/lpc_checksum)
 
 ## Requirements
 The only requirement is Python 3.9 or newer.
