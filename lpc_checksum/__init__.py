@@ -1,6 +1,7 @@
-import sys
-import struct
 import argparse
+import struct
+import sys
+
 import intelhex
 
 __version__ = "2.2.0"
@@ -15,7 +16,7 @@ blocks (w.r.t the start address). This value is placed in the eight block.
 
 BLOCK_COUNT = 7
 BLOCK_SIZE = 4
-BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_SIZE)
+BLOCK_TOTAL = BLOCK_COUNT * BLOCK_SIZE
 
 
 def run() -> None:
@@ -35,21 +36,28 @@ def main(argv: list[str]) -> int:
     # Parse arguments.
     parser = argparse.ArgumentParser(prog=argv[0])
 
+    parser.add_argument("filename", type=str, help="input file for checksumming")
     parser.add_argument(
-        "filename", type=str, help="input file for checksumming")
+        "-f",
+        "--format",
+        action="store",
+        type=str,
+        default="bin",
+        choices=["bin", "hex"],
+        help="input file format (defaults to bin)",
+    )
     parser.add_argument(
-        "-f", "--format", action="store", type=str, default="bin",
-        choices=["bin", "hex"], help="input file format (defaults to bin)")
-    parser.add_argument(
-        "-r", "--readonly", action="store_true",
-        help="read only mode (do not write checksum to file)")
+        "-r",
+        "--readonly",
+        action="store_true",
+        help="read only mode (do not write checksum to file)",
+    )
 
     options = parser.parse_args(argv[1:])
 
     # Calculate checksum.
     try:
-        result = checksum(
-            options.filename, options.format, options.readonly)
+        result = checksum(options.filename, options.format, options.readonly)
     except Exception as e:
         sys.stdout.write("Error: %s\n" % e)
         return 1
@@ -85,7 +93,7 @@ def checksum(filename: str, format: str = "bin", read_only: bool = False) -> int
     result = 0
 
     for i in range(BLOCK_COUNT):
-        value, = struct.unpack_from("I", block, i * BLOCK_SIZE)
+        (value,) = struct.unpack_from("I", block, i * BLOCK_SIZE)
         result = (result + value) & 0xFFFFFFFF
 
     result = ((~result) + 1) & 0xFFFFFFFF

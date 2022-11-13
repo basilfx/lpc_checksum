@@ -1,5 +1,6 @@
 import os
 import unittest
+
 import lpc_checksum
 
 
@@ -13,22 +14,20 @@ class LpcChecksumTest(unittest.TestCase):
         Test the `checksum` method using a binary file.
         """
 
-        path = os.path.join(
-            os.path.dirname(__file__), "data", "hello-world.bin")
+        path = os.path.join(os.path.dirname(__file__), "data", "hello-world.bin")
         checksum = lpc_checksum.checksum(path, format="bin", read_only=True)
 
-        self.assertEqual(checksum, 0xefffe722)
+        self.assertEqual(checksum, 0xEFFFE722)
 
     def test_checksum__hex(self):
         """
         Test the `checksum` method using a HEX file.
         """
 
-        path = os.path.join(
-            os.path.dirname(__file__), "data", "hello-world.hex")
+        path = os.path.join(os.path.dirname(__file__), "data", "hello-world.hex")
         checksum = lpc_checksum.checksum(path, format="hex", read_only=True)
 
-        self.assertEqual(checksum, 0xefffe722)
+        self.assertEqual(checksum, 0xEFFFE722)
 
     def test_checksum__hex_high_start(self):
         """
@@ -36,11 +35,10 @@ class LpcChecksumTest(unittest.TestCase):
         not zero.
         """
 
-        path = os.path.join(
-            os.path.dirname(__file__), "data", "high-start-address.hex")
+        path = os.path.join(os.path.dirname(__file__), "data", "high-start-address.hex")
         checksum = lpc_checksum.checksum(path, format="hex", read_only=True)
 
-        self.assertEqual(checksum, 0x53e48792)
+        self.assertEqual(checksum, 0x53E48792)
 
     def test_checksum__overflow(self):
         """
@@ -50,8 +48,7 @@ class LpcChecksumTest(unittest.TestCase):
         See https://github.com/basilfx/lpc_checksum/issues/2.
         """
 
-        path = os.path.join(
-            os.path.dirname(__file__), "data", "overflow.bin")
+        path = os.path.join(os.path.dirname(__file__), "data", "overflow.bin")
         checksum = lpc_checksum.checksum(path, format="bin", read_only=True)
 
-        self.assertEqual(checksum, 0x02b6aa66)
+        self.assertEqual(checksum, 0x02B6AA66)
