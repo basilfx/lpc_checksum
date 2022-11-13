@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.0.0
+Released 13 November 2022
+
+Highlights:
+* Changed: renamed `--readonly` to `--read-only` in CLI arguments.
+* Changed: renamed `readonly` to `read_only` in `checksum()` method.
+* Improved: Python 3 type annotations.
+* Removed: Python 2 support.
+* Improved: project set-up.
+
+The full list of commits can be found [here](https://github.com/basilfx/lpc_checksum/compare/v2.2.0...v3.0.0).
+
 ## v2.2.0
 Released 18 September 2020
 

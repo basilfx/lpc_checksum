@@ -4,7 +4,7 @@ import sys
 
 import intelhex
 
-__version__ = "2.2.0"
+__version__ = "3.0.0"
 
 """
 Calculate checksum image for LPC firmware images and write. Code is a Python
