@@ -6,7 +6,7 @@ to be compiled.
 
 [![Linting](https://github.com/basilfx/lpc_checksum/actions/workflows/lint.yml/badge.svg)](https://github.com/basilfx/lpc_checksum/actions/workflows/lint.yml)
 [![Testing](https://github.com/basilfx/lpc_checksum/actions/workflows/test.yml/badge.svg)](https://github.com/basilfx/lpc_checksum/actions/workflows/test.yml)
-[![PyPI version](https://badge.fury.io/py/lpc_checksum.svg)](https://badge.fury.io/py/lpc_checksum)
+[![PyPI version](https://badge.fury.io/py/lpc-checksum.svg)](https://badge.fury.io/py/lpc-checksum)
 
 ## Requirements
 The only requirement is Python 3.9 or newer.
