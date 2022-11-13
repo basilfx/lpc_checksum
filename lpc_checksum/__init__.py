@@ -48,7 +48,7 @@ def main(argv: list[str]) -> int:
     )
     parser.add_argument(
         "-r",
-        "--readonly",
+        "--read-only",
         action="store_true",
         help="read only mode (do not write checksum to file)",
     )
@@ -57,7 +57,7 @@ def main(argv: list[str]) -> int:
 
     # Calculate checksum.
     try:
-        result = checksum(options.filename, options.format, options.readonly)
+        result = checksum(options.filename, options.format, options.read_only)
     except Exception as e:
         sys.stdout.write("Error: %s\n" % e)
         return 1
