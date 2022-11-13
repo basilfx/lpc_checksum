@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import sys
 import struct
 import argparse
@@ -20,14 +18,14 @@ BLOCK_SIZE = 4
 BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_SIZE)
 
 
-def run():
+def run() -> None:
     """
     Entry point for console script.
     """
-    sys.exit(main())
+    sys.exit(main(sys.argv))
 
 
-def main():
+def main(argv: list[str]) -> int:
     """
     Command line wrapper for the checsum() method. Requires the first parameter
     to be the filename. If no filename is given, the syntax will be printed.
@@ -35,7 +33,8 @@ def main():
     """
 
     # Parse arguments.
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=argv[0])
+
     parser.add_argument(
         "filename", type=str, help="input file for checksumming")
     parser.add_argument(
@@ -44,7 +43,8 @@ def main():
     parser.add_argument(
         "-r", "--readonly", action="store_true",
         help="read only mode (do not write checksum to file)")
-    options = parser.parse_args()
+
+    options = parser.parse_args(argv[1:])
 
     # Calculate checksum.
     try:
@@ -55,10 +55,10 @@ def main():
         return 1
 
     # Done.
-    sys.stdout.write("Succesfully updated checksum to 0x%08x\n" % result)
+    sys.stdout.write("Succesfully updated checksum to 0x%08x.\n" % result)
 
 
-def checksum(filename, format="bin", read_only=False):
+def checksum(filename: str, format: str = "bin", read_only: bool = False) -> int:
     """
     Calculate the checksum of a given binary image. The checksum is written
     back to the file and is returned. When read_only is set to True, the file
@@ -101,4 +101,4 @@ def checksum(filename, format="bin", read_only=False):
 
 # E.g. `python lpc_checksum.py --format bin firmware.bin`.
 if __name__ == "__main__":
-    run()
+    sys.exit(main(sys.argv))
