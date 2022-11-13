@@ -1,0 +1,53 @@
+[tool.black]
+exclude = '''
+(
+    \.git/
+  | \.vscode/
+  | env/
+)
+'''
+line-length = 88
+target-version = ["py39"]
+
+[tool.isort]
+profile = "black"
+
+[tool.poetry]
+authors = ["Bas Stottelaar <basstottelaar@gmail.com>"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Embedded Systems",
+]
+description = "Python script to calculate LPC firmware checksums"
+homepage = "https://github.com/basilfx/lpc_checksum"
+include = [
+    "LICENSE.md",
+]
+keywords = ["lpc", "mcu", "cortex", "nxp", "flashing"]
+license = "MIT"
+name = "lpc_checksum"
+packages = [
+    { include = "lpc_checksum" }
+]
+readme = "README.md"
+repository = "https://github.com/basilfx/lpc_checksum"
+version = "2.2.0"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+intelhex = "^2.3.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+flake8 = "^5.0.4"
+flake8-mypy = "^17.8.0"
+pytest = "^7.2.0"
+
+[tool.poetry.scripts]
+lpc_checksum = 'lpc_checksum:run'
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]

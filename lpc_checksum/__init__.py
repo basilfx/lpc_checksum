@@ -1,8 +1,7 @@
-#!/usr/bin/env python
-
-import sys
-import struct
 import argparse
+import struct
+import sys
+
 import intelhex
 
 __version__ = "2.2.0"
@@ -17,17 +16,17 @@ blocks (w.r.t the start address). This value is placed in the eight block.
 
 BLOCK_COUNT = 7
 BLOCK_SIZE = 4
-BLOCK_TOTAL = (BLOCK_COUNT * BLOCK_SIZE)
+BLOCK_TOTAL = BLOCK_COUNT * BLOCK_SIZE
 
 
-def run():
+def run() -> None:
     """
     Entry point for console script.
     """
-    sys.exit(main())
+    sys.exit(main(sys.argv))
 
 
-def main():
+def main(argv: list[str]) -> int:
     """
     Command line wrapper for the checsum() method. Requires the first parameter
     to be the filename. If no filename is given, the syntax will be printed.
@@ -35,30 +34,39 @@ def main():
     """
 
     # Parse arguments.
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=argv[0])
+
+    parser.add_argument("filename", type=str, help="input file for checksumming")
     parser.add_argument(
-        "filename", type=str, help="input file for checksumming")
+        "-f",
+        "--format",
+        action="store",
+        type=str,
+        default="bin",
+        choices=["bin", "hex"],
+        help="input file format (defaults to bin)",
+    )
     parser.add_argument(
-        "-f", "--format", action="store", type=str, default="bin",
-        choices=["bin", "hex"], help="input file format (defaults to bin)")
-    parser.add_argument(
-        "-r", "--readonly", action="store_true",
-        help="read only mode (do not write checksum to file)")
-    options = parser.parse_args()
+        "-r",
+        "--read-only",
+        action="store_true",
+        help="read only mode (do not write checksum to file)",
+    )
+
+    options = parser.parse_args(argv[1:])
 
     # Calculate checksum.
     try:
-        result = checksum(
-            options.filename, options.format, options.readonly)
+        result = checksum(options.filename, options.format, options.read_only)
     except Exception as e:
         sys.stdout.write("Error: %s\n" % e)
         return 1
 
     # Done.
-    sys.stdout.write("Succesfully updated checksum to 0x%08x\n" % result)
+    sys.stdout.write("Succesfully updated checksum to 0x%08x.\n" % result)
 
 
-def checksum(filename, format="bin", read_only=False):
+def checksum(filename: str, format: str = "bin", read_only: bool = False) -> int:
     """
     Calculate the checksum of a given binary image. The checksum is written
     back to the file and is returned. When read_only is set to True, the file
@@ -85,7 +93,7 @@ def checksum(filename, format="bin", read_only=False):
     result = 0
 
     for i in range(BLOCK_COUNT):
-        value, = struct.unpack_from("I", block, i * BLOCK_SIZE)
+        (value,) = struct.unpack_from("I", block, i * BLOCK_SIZE)
         result = (result + value) & 0xFFFFFFFF
 
     result = ((~result) + 1) & 0xFFFFFFFF
@@ -101,4 +109,4 @@ def checksum(filename, format="bin", read_only=False):
 
 # E.g. `python lpc_checksum.py --format bin firmware.bin`.
 if __name__ == "__main__":
-    run()
+    sys.exit(main(sys.argv))
