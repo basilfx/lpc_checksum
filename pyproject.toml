@@ -39,7 +39,7 @@ python = "^3.9"
 intelhex = "^2.3.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "^22.10.0"
+black = ">=22.10,<24.0"
 isort = "^5.10.1"
 flake8 = ">=5.0.4,<7.0.0"
 flake8-mypy = "^17.8.0"
